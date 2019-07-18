@@ -68,12 +68,16 @@ import JavaScriptCore
 
 extension KBJSEncoder.Encoder: Encoder {
 	internal func container <Key> (keyedBy type: Key.Type) -> KeyedEncodingContainer <Key> where Key: CodingKey {
-		self.result = JSValue (newObjectIn: self.context);
+		if (self.resultStorage == nil) {
+			self.result = JSValue (newObjectIn: self.context);
+		}
 		return KeyedEncodingContainer (KBJSEncoder.KeyedEncodingContainer (self));
 	}
 	
 	internal func unkeyedContainer () -> UnkeyedEncodingContainer {
-		self.result = JSValue (newArrayIn: self.context);
+		if (self.resultStorage == nil) {
+			self.result = JSValue (newArrayIn: self.context);
+		}
 		return KBJSEncoder.UnkeyedEncodingContainer (self);
 	}
 	
