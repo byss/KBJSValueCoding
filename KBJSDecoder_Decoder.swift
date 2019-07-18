@@ -71,7 +71,7 @@ extension KBJSDecoder.Decoder: Decoder {
 		case .useDefaultKeys:
 			return codingKey;
 		case .convertFromSnakeCase:
-			return codingKey; // TODO
+			return KBJSCodingKey (convertingFromSnakeCase: codingKey);
 		case .custom (let block):
 			return block (self.codingPath + [codingKey]);
 		@unknown default:

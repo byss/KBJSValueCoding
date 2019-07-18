@@ -86,7 +86,7 @@ extension KBJSEncoder.Encoder: Encoder {
 		case .useDefaultKeys:
 			return codingKey;
 		case .convertToSnakeCase:
-			return codingKey; // TODO
+			return KBJSCodingKey (convertingToSnakeCase: codingKey);
 		case .custom (let block):
 			return block (self.codingPath + [codingKey]);
 		@unknown default:
